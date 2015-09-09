@@ -1,0 +1,33 @@
+﻿<Window x:Class="AlliSharp.UnhandledErrorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="hooligan Error Catcher" Height="310" Width="526" FontFamily="Calibri Light">
+
+    <Grid Background="{DynamicResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Style="{DynamicResource UnhandledErrorScrollViewerStyle}" Margin="2,0,0,0" Grid.RowSpan="2">
+            <StackPanel Orientation="Vertical">
+                <Border Height="48"/>
+                <TextBlock x:Name="ErrorInfo" Margin="10" FontSize="18" Foreground="{DynamicResource Foreground}" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Background="{DynamicResource Background}" Opacity=".85">
+            <Grid>
+                <Label Grid.Column="1" Margin="5,0,72,0" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="22">
+                    <TextBlock Text="hooligan caught an unhandled error" TextTrimming="CharacterEllipsis"/>
+                </Label>
+                <Button ToolTip="Copy" Height="28" Margin="0,5,40,0" HorizontalAlignment="Right" Foreground="{DynamicResource Foreground}" Style="{StaticResource IconButtonStyle}" Click="Copy_Click">
+                    <ContentControl Style="{StaticResource Copy}"/>
+                </Button>
+                <Button ToolTip="Kill hooligan" Height="28" Margin="0,5,8,0" HorizontalAlignment="Right" Foreground="{DynamicResource Foreground}" Style="{StaticResource IconButtonStyle}" Click="TerminateProcess_Click">
+                    <ContentControl Style="{StaticResource Terminate}"/>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

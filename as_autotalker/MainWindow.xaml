@@ -1,0 +1,184 @@
+﻿<Window x:Class="as_autotalker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Auto-Clicker by AlliSharp.com" Background="#FFF7F7F7" 
+        Height="332.108" Width="498.163" MinHeight="270" MinWidth="350"
+        Loaded="Window_Loaded" Closing="Window_Closing" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image Source="AlliSharp\allisharplogofull.png" VerticalAlignment="Top" MaxHeight="70"/>
+        <Grid Grid.Row="1" x:Name="tabDefault">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10" Padding="5" Click="btnGoToAlliSharpCom_Click">
+                <Image Source="AlliSharp\allisharplogofull.png" MaxHeight="20"/>
+            </Button>
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <Button x:Name="btnEdit" Background="{DynamicResource ThemeColor2}"  Margin="5,10,10,10" Padding="5" Click="btnEdit_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <ContentControl Style="{StaticResource Editor}"/>
+                        <TextBlock Margin="5,0"  Text="Edit" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <Border Margin="10,0,10,50" Style="{StaticResource BorderStyle}">
+
+                <Grid>
+                    <Border Style="{StaticResource InnerBorderStyle}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="tbClickerStatus" Grid.Row="1" Margin="2,1,2,2" Padding="5" FontSize="16" TextWrapping="Wrap" Opacity="0.9">
+                                <Run Text="AutoClicker Settings"/>
+                                <LineBreak/>
+                                <Run Text="Interval between clicks (in milliseconds) :"/>
+                                <Run Text="{Binding Interval}" FontWeight="Bold"/>
+                                <Run Text=";"/>
+                                <LineBreak/>
+                                <Run Text="Interval mouse button is held down for (in milliseconds; default = 50) :"/>
+                                <Run Text="{Binding MouseDownInterval}" FontWeight="Bold"/>
+                                <Run Text=";"/>
+                                <LineBreak/>
+                                <Run Text="F Key to start auto-clicker :"/>
+                                <Run Text="{Binding FKeyStart}" FontWeight="Bold"/>
+                                <Run Text=";"/>
+                                <LineBreak/>
+                                <Run Text="F Key to stop auto-clicker :"/>
+                                <Run Text="{Binding FKeyStop}" FontWeight="Bold"/>
+                                <Run Text=";"/>
+                                <LineBreak/>
+                                <Run Text="Is Right Click :"/>
+                                <Run Text="{Binding IsRightClick}" FontWeight="Bold"/>
+                                <Run Text=";"/>
+                                <LineBreak/>
+                                <Run Text="Is Running :"/>
+                                <Run Text="{Binding Started}" FontWeight="Bold"/>
+                                <Run Text=";"/>
+
+                        </TextBlock>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="tabEditSettings" Visibility="Collapsed">
+
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <Button x:Name="btnEditDone" Margin="5,10,10,10" Padding="5" Click="btnEditDone_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <ContentControl Style="{StaticResource Save}"/>
+                        <TextBlock Margin="5,0"  Text="Done" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <Border Margin="10,0,10,50" Style="{StaticResource BorderStyle}">
+
+                <Grid>
+                    <Border Style="{StaticResource InnerBorderStyle}"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid>
+                                <Border Background="{DynamicResource Foreground}" Opacity="0.02"/>
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentControl Margin="0,2,0,0" Style="{StaticResource  Loading}" VerticalAlignment="Top" Height="24" Width="24"/>
+                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="Click Interval" FontSize="18" FontWeight="Normal"/>
+                                    <TextBox x:Name="tbInterval" Grid.Column="2" Margin="10,0,0,0" Text="2000" FontSize="16" FontWeight="Normal" PreviewTextInput="tbInterval_PreviewTextInput" DataObject.Pasting="tbInterval_PastingHandler" PreviewKeyDown="tbInterval_PreviewKeyDown"/>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ContentControl Margin="0,2,0,0" Style="{StaticResource  Loading}" VerticalAlignment="Top" Height="24" Width="24"/>
+                                <TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="MouseDown Interval" FontSize="18" FontWeight="Normal"/>
+                                <TextBox x:Name="tbMouseDown" Grid.Column="2" Margin="10,0,0,0" Text="50" FontSize="16" FontWeight="Normal" PreviewTextInput="tbInterval_PreviewTextInput" DataObject.Pasting="tbInterval_PastingHandler" PreviewKeyDown="tbInterval_PreviewKeyDown"/>
+
+                            </Grid>
+                            
+                            <Grid Grid.Row="3">
+                                <Border Background="{DynamicResource Foreground}" Opacity="0.02"/>
+
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                     <ContentControl Margin="0,1,0,0" Style="{StaticResource Keyboard}" Height="24" Width="24"/>
+                                <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="F Key Start" FontSize="18" FontWeight="Normal"/>
+                                <ComboBox x:Name="cbFKeyStart" Grid.Column="2" Margin="10,0,0,0" FontSize="16" FontWeight="Normal">
+                                    <ComboBoxItem Tag="1" IsSelected="True">F1</ComboBoxItem>
+                                    <ComboBoxItem Tag="2">F2</ComboBoxItem>
+                                    <ComboBoxItem Tag="3">F3</ComboBoxItem>
+                                    <ComboBoxItem Tag="4">F4</ComboBoxItem>
+                                    <ComboBoxItem Tag="5">F5</ComboBoxItem>
+                                    <ComboBoxItem Tag="6">F6</ComboBoxItem>
+                                    <ComboBoxItem Tag="7">F7</ComboBoxItem>
+                                    <ComboBoxItem Tag="8">F8</ComboBoxItem>
+                                    <ComboBoxItem Tag="9">F9</ComboBoxItem>
+                                    <ComboBoxItem Tag="10">F10</ComboBoxItem>
+                                    <ComboBoxItem Tag="11">F11</ComboBoxItem>
+                                    <ComboBoxItem Tag="12">F12</ComboBoxItem>
+                                </ComboBox>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="4" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ContentControl Margin="0,1,0,0" Style="{StaticResource Keyboard}" Height="24" Width="24"/>
+                                <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="F Key Stop" FontSize="18" FontWeight="Normal"/>
+                                <ComboBox x:Name="cbFKeyStop" Grid.Column="2" Margin="10,0,0,0" FontSize="16" FontWeight="Normal">
+                                    <ComboBoxItem Tag="1" IsSelected="True">F1</ComboBoxItem>
+                                    <ComboBoxItem Tag="2">F2</ComboBoxItem>
+                                    <ComboBoxItem Tag="3">F3</ComboBoxItem>
+                                    <ComboBoxItem Tag="4">F4</ComboBoxItem>
+                                    <ComboBoxItem Tag="5">F5</ComboBoxItem>
+                                    <ComboBoxItem Tag="6">F6</ComboBoxItem>
+                                    <ComboBoxItem Tag="7">F7</ComboBoxItem>
+                                    <ComboBoxItem Tag="8">F8</ComboBoxItem>
+                                    <ComboBoxItem Tag="9">F9</ComboBoxItem>
+                                    <ComboBoxItem Tag="10">F10</ComboBoxItem>
+                                    <ComboBoxItem Tag="11">F11</ComboBoxItem>
+                                    <ComboBoxItem Tag="12">F12</ComboBoxItem>
+                                </ComboBox>
+                            </Grid>
+                            <Grid Grid.Row="5">
+                                <Border Background="{DynamicResource Foreground}" Opacity="0.02"/>
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentControl Margin="0,1,0,0" Style="{StaticResource Expand}" Height="24" Width="24"/>
+                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="Right Click" FontSize="18" FontWeight="Normal"/>
+                                    <CheckBox x:Name="cbIsRightClick" Grid.Column="2" IsChecked="False" Margin="10,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Content="" FontSize="18" FontWeight="Normal"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
